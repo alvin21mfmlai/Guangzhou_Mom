@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guangzhou Trip</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Day-by-day plan for our Guangzhou trip, 10–15 January 2027, with free time marked.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500;600&family=Young+Serif&display=swap">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>
+/* Layout: one reading column. Sticky day chips, a to-scale week strip (6am-10pm) where yellow = free time,
+   then one section per day headed by a street-plaque tile. */
+:root {
+  --bg:#F3F6FB; --surface:#FFFFFF; --ink:#13213E; --muted:#55627E; --line:#D7DEEA; --wave:#CBD6E8;
+  --cobalt:#1C4C9C; --booked:#1C4C9C; --on-booked:#FFFFFF;
+  --plan:#D9E4F6; --travel:#C9D0DD;
+  --free:#F3BD43; --on-free:#3B2900; --free-soft:#FFF2CF; --free-ink:#7A5300;
+  --red:#B3261E; --red-soft:#FBE4E1;
+  --tile:#FFFFFF;
+  --f-display:"Young Serif","Songti TC","Noto Serif TC",Georgia,serif;
+  --f-body:"Atkinson Hyperlegible","PingFang TC","Noto Sans TC",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg:#0D1424; --surface:#131C31; --ink:#E5EAF4; --muted:#9AA6C1; --line:#26314B; --wave:#1D2843;
+  --cobalt:#8EB0F0; --booked:#3D6BC4; --on-booked:#FFFFFF;
+  --plan:#22345A; --travel:#323D57;
+  --free:#E8B23E; --on-free:#231700; --free-soft:#30270F; --free-ink:#F2D27F;
+  --red:#F28B82; --red-soft:#3A1B1A;
+  --tile:#131C31; color-scheme:dark;
+} }
+:root[data-theme="dark"] {
+  --bg:#0D1424; --surface:#131C31; --ink:#E5EAF4; --muted:#9AA6C1; --line:#26314B; --wave:#1D2843;
+  --cobalt:#8EB0F0; --booked:#3D6BC4; --on-booked:#FFFFFF;
+  --plan:#22345A; --travel:#323D57;
+  --free:#E8B23E; --on-free:#231700; --free-soft:#30270F; --free-ink:#F2D27F;
+  --red:#F28B82; --red-soft:#3A1B1A;
+  --tile:#131C31; color-scheme:dark;
+}
+* { box-sizing:border-box }
+html { scroll-behavior:smooth; scroll-padding-top:calc(env(safe-area-inset-top,0px) + 72px) }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto } }
+body { background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased }
+body::before { content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--bg) }
+a { color:var(--cobalt); text-underline-offset:3px }
+a:focus-visible { outline:2px solid var(--cobalt); outline-offset:2px; border-radius:4px }
+h1,h2,h3 { text-wrap:balance; margin:0 }
+p { margin:0 }
+.wrap { max-width:860px; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px)) }
+
+/* Hero */
+.hero { padding-block:44px 0 }
+.eyebrow { font-family:var(--f-mono); font-size:13px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:var(--cobalt) }
+.hero h1 { font-family:var(--f-display); font-weight:400; font-size:clamp(2.5rem, 8vw, 4.25rem); line-height:1.02; margin-top:10px; letter-spacing:-.01em }
+.hero h1 .zh { display:block; font-size:.42em; letter-spacing:.3em; color:var(--muted); margin-top:10px }
+.lede { font-size:1.125rem; max-width:60ch; margin-top:16px; color:var(--ink) }
+.countdown { display:inline-block; margin-top:16px; font-family:var(--f-mono); font-weight:600; font-size:14px; background:var(--free); color:var(--on-free); padding:4px 10px; border-radius:6px }
+.countdown:empty { display:none }
+.facts { display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:18px 28px; margin:28px 0 0; padding-top:20px; border-top:1px solid var(--line) }
+.facts div { min-width:0 }
+.facts dt { font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted) }
+.facts dd { margin:4px 0 0 }
+.facts .mono { font-family:var(--f-mono); font-size:14px; font-weight:500 }
+.calcada { height:36px; margin-top:36px; background:var(--wave); -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='36' viewBox='0 0 48 36'%3E%3Cg fill='none' stroke='black' stroke-width='4.5'%3E%3Cpath d='M0 6 Q12 -2 24 6 T48 6'/%3E%3Cpath d='M0 18 Q12 10 24 18 T48 18'/%3E%3Cpath d='M0 30 Q12 22 24 30 T48 30'/%3E%3C/g%3E%3C/svg%3E") repeat-x left center / 48px 36px; mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='36' viewBox='0 0 48 36'%3E%3Cg fill='none' stroke='black' stroke-width='4.5'%3E%3Cpath d='M0 6 Q12 -2 24 6 T48 6'/%3E%3Cpath d='M0 18 Q12 10 24 18 T48 18'/%3E%3Cpath d='M0 30 Q12 22 24 30 T48 30'/%3E%3C/g%3E%3C/svg%3E") repeat-x left center / 48px 36px }
+
+/* Sticky day chips */
+.daynav { position:sticky; top:env(safe-area-inset-top,0px); z-index:6; background:var(--bg); border-bottom:1px solid var(--line) }
+.daynav .wrap { display:flex; gap:6px; overflow-x:auto; padding-block:8px; scrollbar-width:none }
+.daynav .wrap::-webkit-scrollbar { display:none }
+.daynav a { flex:0 0 auto; display:flex; flex-direction:column; align-items:center; padding:5px 12px; border-radius:8px; text-decoration:none; color:var(--ink); line-height:1.2 }
+.daynav a:hover { background:var(--surface) }
+.daynav a span { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted) }
+.daynav a b { font-family:var(--f-mono); font-size:14px; font-weight:600 }
+.daynav a.is-today { background:var(--free); }
+.daynav a.is-today span, .daynav a.is-today b { color:var(--on-free) }
+
+/* Section shells */
+main > section { padding-block:44px }
+.sec-h { font-family:var(--f-display); font-weight:400; font-size:clamp(1.6rem, 4.5vw, 2.1rem) }
+.sec-intro { color:var(--muted); margin-top:8px; max-width:62ch }
+
+/* Week strip */
+.legend { display:flex; flex-wrap:wrap; gap:8px 18px; margin:18px 0 20px; font-size:14px; padding:0; list-style:none }
+.legend li { display:flex; align-items:center; gap:8px }
+.sw { width:16px; height:16px; border-radius:4px; flex:0 0 auto }
+.sw.free { background:var(--free) } .sw.booked { background:var(--booked) } .sw.plan { background:var(--plan) }
+.sw.travel { background:var(--travel) } .sw.opt { border:2px dashed var(--cobalt) }
+.sw.tilde { display:grid; place-items:center; font-family:var(--f-mono); font-weight:600; font-size:15px; color:var(--muted) }
+.chart { display:grid; grid-template-columns:44px repeat(6, minmax(0,1fr)); column-gap:8px; row-gap:8px }
+.ch-head { display:flex; flex-direction:column; align-items:center; text-decoration:none; color:var(--ink); line-height:1.15 }
+.ch-head span { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted) }
+.ch-head b { font-family:var(--f-display); font-weight:400; font-size:22px }
+.ch-axis, .ch-track { position:relative; height:380px }
+.ch-axis span { position:absolute; right:2px; transform:translateY(-50%); font-family:var(--f-mono); font-size:11px; color:var(--muted); font-variant-numeric:tabular-nums }
+.ch-track { background:var(--surface); border:1px solid var(--line); border-radius:8px; overflow:hidden }
+.ch-track > i { position:absolute; left:0; right:0; height:1px; background:var(--line) }
+.lane { position:absolute; top:0; bottom:0 }
+.lane.a { left:0; width:36%; border-right:1px dashed var(--line) }
+.lane.b { left:36%; right:0 }
+.blk { position:absolute; left:4px; right:4px; border-radius:4px; display:flex; align-items:center; justify-content:center; overflow:hidden; font-family:var(--f-mono); font-size:11px; font-weight:600 }
+.lane .blk { left:3px; right:3px }
+.blk.t-free { background:var(--free); color:var(--on-free) }
+.blk.t-free.eve { background:linear-gradient(var(--free), color-mix(in srgb, var(--free) 15%, transparent)); align-items:flex-start; padding-top:4px }
+.blk.t-booked { background:var(--booked) }
+.blk.t-plan { background:var(--plan) }
+.blk.t-travel { background:var(--travel) }
+.blk.t-opt { background:transparent; border:2px dashed var(--cobalt); left:9px; right:9px; z-index:2 }
+.ch-total { text-align:center; line-height:1.2 }
+.ch-total b { display:block; font-family:var(--f-mono); font-weight:600; font-size:14px; font-variant-numeric:tabular-nums }
+.ch-total span { font-size:11px; color:var(--muted) }
+.ch-total.ax { text-align:right; padding-top:2px }
+.ch-total.ax span { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase }
+
+/* Day sections */
+.day { border-top:1px solid var(--line) }
+.dayhead { display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px }
+.plaque { display:inline-flex; flex-direction:column; align-items:center; gap:3px; padding:10px 20px; background:var(--tile); border:2px solid var(--cobalt); border-radius:6px; box-shadow:inset 0 0 0 3px var(--tile), inset 0 0 0 4px var(--cobalt); color:var(--cobalt) }
+.plaque .zh { font-family:var(--f-display); font-size:15px; letter-spacing:.14em }
+.plaque .pt { font-family:var(--f-display); font-size:12.5px; letter-spacing:.1em; text-transform:uppercase }
+.xmas { font-size:13px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--red); border:1.5px solid currentColor; border-radius:999px; padding:3px 10px }
+.today { font-family:var(--f-mono); font-size:13px; font-weight:600; background:var(--free); color:var(--on-free); border-radius:6px; padding:4px 10px }
+.day h2 { font-family:var(--f-display); font-weight:400; font-size:clamp(1.7rem, 5vw, 2.3rem); line-height:1.12; margin-top:18px }
+.daynote { margin-top:8px; color:var(--muted); max-width:62ch }
+.freebox { margin-top:20px; background:var(--free-soft); border-radius:10px; padding:14px 16px }
+.freebox h3 { font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--free-ink) }
+.freebox ul { list-style:none; margin:8px 0 0; padding:0; display:grid; gap:6px }
+.freebox li { display:grid; grid-template-columns:minmax(118px, max-content) minmax(0,1fr); gap:4px 14px; align-items:baseline }
+.freebox b { font-family:var(--f-mono); font-weight:600; font-size:14.5px; white-space:nowrap; font-variant-numeric:tabular-nums }
+.freebox .who { color:var(--muted); font-size:14px }
+.freebox li.none b { color:var(--muted) }
+.flag { margin-top:14px; padding:12px 14px; border:1.5px solid var(--red); border-radius:10px; background:var(--red-soft); font-size:15px; max-width:70ch }
+.flag b { color:var(--red) }
+
+/* Timeline */
+.tl { --tcol:96px; --dcol:18px; --gap:12px; --pad:10px; list-style:none; margin:22px 0 0; padding:0; position:relative }
+.tl::before { content:""; position:absolute; left:calc(var(--pad) + var(--tcol) + var(--gap) + var(--dcol) / 2 - 1px); top:14px; bottom:14px; width:2px; background:var(--line) }
+.it { display:grid; grid-template-columns:var(--tcol) var(--dcol) minmax(0,1fr); column-gap:var(--gap); padding:12px var(--pad); position:relative; border-radius:10px }
+.when { display:flex; flex-direction:column; align-items:flex-end; text-align:right; font-family:var(--f-mono); font-variant-numeric:tabular-nums; line-height:1.3; padding-top:1px }
+.when .t { font-size:15px; font-weight:600 }
+.when .e { font-size:12.5px; color:var(--muted); font-weight:500 }
+.dot { width:14px; height:14px; border-radius:50%; margin:4px auto 0; background:var(--surface); border:2px solid var(--cobalt); position:relative; z-index:1 }
+.what { min-width:0 }
+.ttl { font-weight:700; font-size:17px; line-height:1.35; display:flex; flex-wrap:wrap; align-items:center; gap:4px 8px }
+.det { color:var(--muted); font-size:15px; margin-top:2px }
+.addr { font-size:14px; margin-top:2px; color:var(--muted) }
+.links { margin-top:4px; font-size:14.5px; display:flex; flex-wrap:wrap; gap:4px 14px }
+.kind { display:block; font-size:11.5px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--free-ink); margin-bottom:1px }
+.pill { font-size:12px; font-weight:700; letter-spacing:.02em; padding:2px 8px; border-radius:999px; line-height:1.4; white-space:nowrap }
+.p-booked { background:var(--booked); color:var(--on-booked) }
+.p-warn { background:var(--red-soft); color:var(--red); border:1px solid var(--red) }
+.p-opt { border:1.5px dashed var(--cobalt); color:var(--cobalt) }
+.it.t-booked .dot { background:var(--booked); border-color:var(--booked) }
+.it.t-free { background:var(--free-soft) }
+.it.t-free .dot { background:var(--free); border-color:var(--free) }
+.it.t-opt .dot { border-style:dashed }
+.it.t-travel { padding-block:6px }
+.it.t-travel .dot { width:8px; height:8px; margin-top:7px; border:0; background:var(--travel) }
+.it.t-travel .ttl { font-weight:400; font-size:15px; color:var(--muted) }
+.it.t-travel .det { display:inline; font-size:14px }
+.it.t-travel .what { display:flex; flex-wrap:wrap; gap:0 8px; align-items:baseline }
+.it.t-travel .when .t { font-size:13.5px; font-weight:500; color:var(--muted) }
+.groups { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap:8px 28px; margin-top:22px }
+.group { min-width:0 }
+.group h3 { font-size:13px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--cobalt); padding-bottom:8px; border-bottom:1px solid var(--line) }
+.group .tl { margin-top:10px }
+
+/* Bookings / lists */
+.rows { margin-top:22px }
+.rows h3 { font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); margin:26px 0 6px }
+.row { display:grid; grid-template-columns:150px minmax(0,1fr); gap:4px 18px; padding:12px 0; border-top:1px solid var(--line) }
+.row .dt { font-family:var(--f-mono); font-size:14.5px; font-weight:600; font-variant-numeric:tabular-nums; line-height:1.4 }
+.row .dt span { display:block; color:var(--muted); font-weight:500 }
+.row .nm { font-weight:700; font-size:17px }
+.row .sub { color:var(--muted); font-size:15px }
+.row .tel { font-family:var(--f-mono); font-size:14px; user-select:all }
+.todo { list-style:none; padding:0; margin:22px 0 0; display:grid; gap:12px; counter-reset:q }
+.todo li { display:grid; grid-template-columns:28px minmax(0,1fr); gap:12px; padding:14px 16px; background:var(--surface); border:1px solid var(--line); border-radius:10px; counter-increment:q }
+.todo li::before { content:counter(q); width:28px; height:28px; border-radius:50%; display:grid; place-items:center; font-family:var(--f-mono); font-weight:600; font-size:14px; border:1.5px solid var(--cobalt); color:var(--cobalt) }
+.todo b { display:block }
+.todo p { color:var(--muted); font-size:15px; margin-top:2px }
+.ideas { display:grid; grid-template-columns:repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap:0 28px; margin-top:16px }
+.ideas div { padding:14px 0; border-top:1px solid var(--line); min-width:0 }
+.ideas b { display:block; font-size:16.5px }
+.ideas p { color:var(--muted); font-size:15px; margin-top:2px }
+
+@media (max-width: 600px) {
+  .chart { grid-template-columns:34px repeat(6, minmax(0,1fr)); column-gap:4px }
+  .ch-axis, .ch-track { height:340px }
+  .ch-axis span { font-size:10px }
+  .blk { font-size:10px; left:2px; right:2px }
+  .blk.t-opt { left:6px; right:6px }
+  .ch-head b { font-size:19px }
+  .ch-total b { font-size:12.5px }
+  .ch-total span { font-size:10px }
+  .tl { --tcol:82px; --dcol:14px; --gap:8px; --pad:8px }
+  .when .e { font-size:11.5px; white-space:nowrap }
+  .when .t { font-size:14px }
+  .ttl { font-size:16px }
+  .row { grid-template-columns:1fr }
+  .freebox li { grid-template-columns:1fr; gap:0 }
+  .plaque { padding:9px 14px }
+  .plaque .zh { font-size:14px; letter-spacing:.08em }
+  .plaque .pt { font-size:11.5px; letter-spacing:.06em }
+}
+
+/* Highlights list inside a timeline item */
+.hl { list-style:none; margin:8px 0 0; padding:0; display:grid; gap:6px; font-size:15px; color:var(--muted) }
+.hl a { font-weight:700 }
+.hl li.pick a::after { content:"Top pick"; margin-left:8px; font-size:11.5px; font-weight:700; letter-spacing:.02em; padding:1px 7px; border-radius:999px; background:var(--free); color:var(--on-free); text-decoration:none; display:inline-block; vertical-align:1px }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Guangzhou trip · 10–15 Jan 2027</p>
+    <h1>Six days in Guangzhou<span class="zh" lang="zh-Hans">广州六日游</span></h1>
+    <p class="lede">Based on Beijing Road in Yuexiu, with a land tour, a Cantonese banquet and plenty of food and shopping before Chinese New Year. Here’s what’s planned and when you’re free.</p>
+    <p class="countdown" id="countdown"></p>
+    <dl class="facts">
+      <div><dt>Dates</dt><dd>Sun 10 – Fri 15 Jan 2027</dd></div>
+      <div><dt>Staying</dt><dd>Mercure Hotel Guangzhou Beijing Road</dd></div>
+      <div><dt>Flying out</dt><dd><span class="mono">SQ850</span> · Sun 10 Jan<br><span class="mono">8:05am SIN → 12:10pm CAN</span></dd></div>
+      <div><dt>Flying home</dt><dd><span class="mono">SQ851</span> · Fri 15 Jan<br><span class="mono">1:30pm CAN → 5:50pm SIN</span></dd></div>
+    </dl>
+  </div>
+  <div class="calcada" aria-hidden="true"></div>
+</header>
+
+<nav class="daynav" aria-label="Jump to a day"><div class="wrap"><a href="#day1" data-day="day1"><span>Sun</span><b>10 Jan</b></a><a href="#day2" data-day="day2"><span>Mon</span><b>11 Jan</b></a><a href="#day3" data-day="day3"><span>Tue</span><b>12 Jan</b></a><a href="#day4" data-day="day4"><span>Wed</span><b>13 Jan</b></a><a href="#day5" data-day="day5"><span>Thu</span><b>14 Jan</b></a><a href="#day6" data-day="day6"><span>Fri</span><b>15 Jan</b></a><a href="#details"><span>Key</span><b>Details</b></a></div></nav>
+
+<main>
+<section id="glance">
+  <div class="wrap">
+    <h2 class="sec-h">Free time at a glance</h2>
+    <p class="sec-intro">Yellow is free time. Each column is one day from 6am to 10pm, with the daytime free hours added up underneath. Evenings are free too.</p>
+    <ul class="legend">
+      <li><span class="sw free"></span>Free time</li>
+      <li><span class="sw booked"></span>Booked (flights)</li>
+      <li><span class="sw plan"></span>Planned together</li>
+      <li><span class="sw travel"></span>Travel and check-in</li>
+      <li><span class="sw opt"></span>Optional</li>
+      <li><span class="sw tilde">~</span>Approximate time</li>
+    </ul>
+    <div class="chart" role="img" aria-label="Week view from 6am to 10pm. Daytime free time: 10 Jan 3h 45m + evening; 11 Jan 2h + evening; 12 Jan from 10am rest of day; 13 Jan 9h 30m + evening; 14 Jan 5h 50m + evening; 15 Jan 1h 30m at airport."><div></div><a class="ch-head" href="#day1"><span>Sun</span><b>10</b></a><a class="ch-head" href="#day2"><span>Mon</span><b>11</b></a><a class="ch-head" href="#day3"><span>Tue</span><b>12</b></a><a class="ch-head" href="#day4"><span>Wed</span><b>13</b></a><a class="ch-head" href="#day5"><span>Thu</span><b>14</b></a><a class="ch-head" href="#day6"><span>Fri</span><b>15</b></a><div class="ch-axis"><span style="top:0.00%">6am</span><span style="top:12.50%">8am</span><span style="top:25.00%">10am</span><span style="top:37.50%">12pm</span><span style="top:50.00%">2pm</span><span style="top:62.50%">4pm</span><span style="top:75.00%">6pm</span><span style="top:87.50%">8pm</span><span style="top:100.00%">10pm</span></div><div class="ch-track"><i style="top:0.00%"></i><i style="top:12.50%"></i><i style="top:25.00%"></i><i style="top:37.50%"></i><i style="top:50.00%"></i><i style="top:62.50%"></i><i style="top:75.00%"></i><i style="top:87.50%"></i><i style="top:100.00%"></i><div class="blk t-booked" style="top:13.02%;height:calc(25.52% - 2px)"><span></span></div><div class="blk t-travel" style="top:38.54%;height:calc(8.33% - 2px)"><span></span></div><div class="blk t-travel" style="top:46.88%;height:calc(6.25% - 2px)"><span></span></div><div class="blk t-travel" style="top:53.12%;height:calc(1.56% - 2px)"><span></span></div><div class="blk t-free" style="top:56.25%;height:calc(23.44% - 2px)"><span>3h45m</span></div><div class="blk t-plan" style="top:79.69%;height:calc(4.69% - 2px)"><span></span></div><div class="blk t-plan" style="top:84.38%;height:calc(9.38% - 2px)"><span></span></div><div class="blk t-free eve" style="top:93.75%;height:calc(6.25% - 2px)"><span>eve</span></div></div><div class="ch-track"><i style="top:0.00%"></i><i style="top:12.50%"></i><i style="top:25.00%"></i><i style="top:37.50%"></i><i style="top:50.00%"></i><i style="top:62.50%"></i><i style="top:75.00%"></i><i style="top:87.50%"></i><i style="top:100.00%"></i><div class="blk t-plan" style="top:9.38%;height:calc(6.25% - 2px)"><span></span></div><div class="blk t-plan" style="top:18.75%;height:calc(50.00% - 2px)"><span></span></div><div class="blk t-free" style="top:68.75%;height:calc(12.50% - 2px)"><span>2h</span></div><div class="blk t-plan" style="top:81.25%;height:calc(14.06% - 2px)"><span></span></div><div class="blk t-travel" style="top:95.31%;height:calc(3.12% - 2px)"><span></span></div><div class="blk t-free eve" style="top:98.44%;height:calc(1.56% - 2px)"><span></span></div></div><div class="ch-track"><i style="top:0.00%"></i><i style="top:12.50%"></i><i style="top:25.00%"></i><i style="top:37.50%"></i><i style="top:50.00%"></i><i style="top:62.50%"></i><i style="top:75.00%"></i><i style="top:87.50%"></i><i style="top:100.00%"></i><div class="blk t-opt" style="top:3.12%;height:calc(6.25% - 2px)"><span></span></div><div class="blk t-plan" style="top:15.62%;height:calc(6.25% - 2px)"><span></span></div><div class="blk t-travel" style="top:23.44%;height:calc(1.56% - 2px)"><span></span></div><div class="blk t-free eve" style="top:25.00%;height:calc(75.00% - 2px)"><span>open</span></div></div><div class="ch-track"><i style="top:0.00%"></i><i style="top:12.50%"></i><i style="top:25.00%"></i><i style="top:37.50%"></i><i style="top:50.00%"></i><i style="top:62.50%"></i><i style="top:75.00%"></i><i style="top:87.50%"></i><i style="top:100.00%"></i><div class="blk t-opt" style="top:3.12%;height:calc(6.25% - 2px)"><span></span></div><div class="blk t-plan" style="top:15.62%;height:calc(6.25% - 2px)"><span></span></div><div class="blk t-travel" style="top:23.44%;height:calc(1.56% - 2px)"><span></span></div><div class="blk t-free" style="top:25.00%;height:calc(31.25% - 2px)"><span>5h</span></div><div class="blk t-travel" style="top:56.25%;height:calc(3.12% - 2px)"><span></span></div><div class="blk t-free" style="top:59.38%;height:calc(28.12% - 2px)"><span>4h30m</span></div><div class="blk t-travel" style="top:87.50%;height:calc(3.12% - 2px)"><span></span></div><div class="blk t-free eve" style="top:90.62%;height:calc(9.38% - 2px)"><span>eve</span></div></div><div class="ch-track"><i style="top:0.00%"></i><i style="top:12.50%"></i><i style="top:25.00%"></i><i style="top:37.50%"></i><i style="top:50.00%"></i><i style="top:62.50%"></i><i style="top:75.00%"></i><i style="top:87.50%"></i><i style="top:100.00%"></i><div class="blk t-opt" style="top:1.56%;height:calc(7.81% - 2px)"><span></span></div><div class="blk t-plan" style="top:9.38%;height:calc(4.69% - 2px)"><span></span></div><div class="blk t-travel" style="top:14.06%;height:calc(1.56% - 2px)"><span></span></div><div class="blk t-plan" style="top:15.62%;height:calc(34.38% - 2px)"><span></span></div><div class="blk t-travel" style="top:50.00%;height:calc(1.56% - 2px)"><span></span></div><div class="blk t-plan" style="top:51.56%;height:calc(7.81% - 2px)"><span></span></div><div class="blk t-travel" style="top:59.38%;height:calc(1.04% - 2px)"><span></span></div><div class="blk t-free" style="top:60.42%;height:calc(36.46% - 2px)"><span>5h50m</span></div><div class="blk t-free eve" style="top:96.88%;height:calc(3.12% - 2px)"><span></span></div></div><div class="ch-track"><i style="top:0.00%"></i><i style="top:12.50%"></i><i style="top:25.00%"></i><i style="top:37.50%"></i><i style="top:50.00%"></i><i style="top:62.50%"></i><i style="top:75.00%"></i><i style="top:87.50%"></i><i style="top:100.00%"></i><div class="blk t-plan" style="top:12.50%;height:calc(6.25% - 2px)"><span></span></div><div class="blk t-travel" style="top:18.75%;height:calc(1.56% - 2px)"><span></span></div><div class="blk t-travel" style="top:21.88%;height:calc(6.25% - 2px)"><span></span></div><div class="blk t-travel" style="top:28.12%;height:calc(6.25% - 2px)"><span></span></div><div class="blk t-free" style="top:34.38%;height:calc(9.38% - 2px)"><span>1h30m</span></div><div class="blk t-travel" style="top:43.75%;height:calc(3.12% - 2px)"><span></span></div><div class="blk t-booked" style="top:46.88%;height:calc(27.08% - 2px)"><span></span></div></div><div class="ch-total ax"><span>Free</span></div><div class="ch-total"><b>3h 45m</b><span>+ evening</span></div><div class="ch-total"><b>2h</b><span>+ evening</span></div><div class="ch-total"><b>from 10am</b><span>rest of day</span></div><div class="ch-total"><b>9h 30m</b><span>+ evening</span></div><div class="ch-total"><b>5h 50m</b><span>+ evening</span></div><div class="ch-total"><b>1h 30m</b><span>at airport</span></div></div>
+  </div>
+</section>
+
+<section class="day" id="day1" data-date="2027-01-10">
+  <div class="wrap">
+    <div class="dayhead">
+      <div class="plaque"><span class="zh" lang="zh-Hans">第一天 · 1月10日 星期日</span><span class="pt">Day 1 · Sunday 10 January</span></div>
+      <span class="today" hidden>Today</span>
+    </div>
+    <h2>Arrival and Beijing Road</h2>
+    <p class="daynote">Land at midday, check in, then an easy first afternoon on Beijing Road Pedestrian Street, right by the hotel.</p>
+    <div class="freebox"><h3>Free time today</h3><ul><li><b>3–6:45pm</b><span>Free and easy at Beijing Road Pedestrian Street</span></li><li><b>From 9pm</b><span>Back to the hotel and rest early</span></li></ul></div>
+    <ol class="tl"><li class="it t-booked"><div class="when"><span class="t">8:05am</span><span class="e">to 12:10pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Fly Singapore → Guangzhou<span class="pill p-booked">Flight</span></p><p class="det">SQ850, lands 12:10pm</p></div></li><li class="it t-travel"><div class="when"><span class="t">12:10pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Clear customs</p></div></li><li class="it t-travel"><div class="when"><span class="t">1:30pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Transfer to Mercure Hotel</p><p class="det">About 45 min</p></div></li><li class="it t-travel"><div class="when"><span class="t">2:30pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Check in at the hotel</p></div></li><li class="it t-free"><div class="when"><span class="t">3pm</span><span class="e">to 6:45pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><span class="kind">Free time</span><p class="ttl">Free and easy at Beijing Road Pedestrian Street</p><p class="det">Grab some light food along the way</p></div></li><li class="it t-plan"><div class="when"><span class="t">6:45pm</span><span class="e">to 7:30pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Dafo Temple 大佛寺</p><p class="det">Pray, and see the temple lit up at night</p></div></li><li class="it t-plan"><div class="when"><span class="t">7:30pm</span><span class="e">to 9pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Dinner at Dagefan 大鸽饭</p></div></li><li class="it t-free"><div class="when"><span class="t">From 9pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><span class="kind">Free time</span><p class="ttl">Back to the hotel and rest early</p></div></li></ol>
+  </div>
+</section>
+<section class="day" id="day2" data-date="2027-01-11">
+  <div class="wrap">
+    <div class="dayhead">
+      <div class="plaque"><span class="zh" lang="zh-Hans">第二天 · 1月11日 星期一</span><span class="pt">Day 2 · Monday 11 January</span></div>
+      <span class="today" hidden>Today</span>
+    </div>
+    <h2>Land tour and Cantonese banquet</h2>
+    <p class="daynote">Morning call, then a full-day guided tour and a Cantonese dinner show in the evening.</p>
+    <div class="freebox"><h3>Free time today</h3><ul><li><b>5–7pm</b><span>Free time before the dinner show</span></li><li><b>From 9:45pm</b><span>Rest early</span></li></ul></div>
+    <ol class="tl"><li class="it t-plan"><div class="when"><span class="t">7:30am</span><span class="e">to 8:30am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Breakfast at the hotel</p></div></li><li class="it t-plan"><div class="when"><span class="t">9am</span><span class="e">to 5pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Full-day land tour</p><p class="det">Culture and food tour: Chen Clan Academy, Xiguan Old Town, food stops on Xihua Road, Canton Tower and Zhujiang New Town</p><p class="links"><a href="https://sg.trip.com/things-to-do/detail/105163697/" target="_blank" rel="noopener">Tour details (Trip.com)<span aria-hidden="true"> ↗</span></a></p></div></li><li class="it t-free"><div class="when"><span class="t">5pm</span><span class="e">to 7pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><span class="kind">Free time</span><p class="ttl">Free time before the dinner show</p><p class="det">Includes getting to the show</p></div></li><li class="it t-plan"><div class="when"><span class="t">7pm</span><span class="e">to 9:15pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Guangzhou Banquet dinner show</p><p class="det">Lingnan intangible heritage Cantonese dinner and show</p><p class="links"><a href="https://sg.trip.com/things-to-do/detail/110035659?language=EN&amp;locale=en_sg" target="_blank" rel="noopener">Show details (Trip.com)<span aria-hidden="true"> ↗</span></a></p></div></li><li class="it t-travel"><div class="when"><span class="t">9:15pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Back to the hotel</p></div></li><li class="it t-free"><div class="when"><span class="t">From 9:45pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><span class="kind">Free time</span><p class="ttl">Rest early</p></div></li></ol>
+  </div>
+</section>
+<section class="day" id="day3" data-date="2027-01-12">
+  <div class="wrap">
+    <div class="dayhead">
+      <div class="plaque"><span class="zh" lang="zh-Hans">第三天 · 1月12日 星期二</span><span class="pt">Day 3 · Tuesday 12 January</span></div>
+      <span class="today" hidden>Today</span>
+    </div>
+    <h2>Shangxiajiu Pedestrian Street</h2>
+    <p class="daynote">After breakfast the rest of the day is free around Shangxiajiu, for dim sum, shopping and old Xiguan architecture.</p>
+    <div class="freebox"><h3>Free time today</h3><ul><li><b>From ~10am</b><span>Shangxiajiu Pedestrian Street</span></li></ul></div>
+    <ol class="tl"><li class="it t-opt"><div class="when"><span class="t">6:30am</span><span class="e">to 7:30am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Gym – Ros<span class="pill p-opt">Optional</span></p></div></li><li class="it t-plan"><div class="when"><span class="t">8:30am</span><span class="e">to 9:30am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Breakfast at the hotel</p></div></li><li class="it t-travel"><div class="when"><span class="t">9:45am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">To Shangxiajiu Pedestrian Street</p><p class="det">20 min</p></div></li><li class="it t-free"><div class="when"><span class="t">From ~10am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><span class="kind">Free time</span><p class="ttl">Shangxiajiu Pedestrian Street</p><p class="det">Free and easy for the rest of the day. The street is free to walk; you only pay for food and shopping.</p><ul class="hl"><li class="pick"><a href="https://www.zhujianger.com/blogs/post/shangxiajiu-pedestrian-street-guangzhou" target="_blank" rel="noopener">Taotaoju 陶陶居</a> Traditional Cantonese dim sum, including shrimp dumplings and roast goose</li><li class="pick"><a href="https://www.travelchinaguide.com/cityguides/guangdong/guangzhou/shangxiajiu-pedestrian-street.htm" target="_blank" rel="noopener">Dongji Xintiandi Plaza</a> Large mall with fashion, shoes and local snacks</li><li><a href="https://www.travelchinaguide.com/cityguides/guangdong/guangzhou/shangxiajiu-pedestrian-street.htm" target="_blank" rel="noopener">Lianxianglou 莲香楼</a> Cantonese dim sum, lotus-seed-paste mooncakes and soy sauce chicken</li><li><a href="https://www.travelchinaguide.com/cityguides/guangdong/guangzhou/shangxiajiu-pedestrian-street.htm" target="_blank" rel="noopener">Liwan Plaza</a> Six floors, with a jewellery wholesale market plus clothing and food stores</li><li><a href="https://www.eastchinatrip.com/shangxiajiu-pedestrian-street-guangzhou-travel-guide/" target="_blank" rel="noopener">Lingnan arcades</a> Qilou arcade buildings that mix European and Chinese styles, with Tanglong doors</li></ul></div></li></ol>
+  </div>
+</section>
+<section class="day" id="day4" data-date="2027-01-13">
+  <div class="wrap">
+    <div class="dayhead">
+      <div class="plaque"><span class="zh" lang="zh-Hans">第四天 · 1月13日 星期三</span><span class="pt">Day 4 · Wednesday 13 January</span></div>
+      <span class="today" hidden>Today</span>
+    </div>
+    <h2>Outlets and Parc Central</h2>
+    <p class="daynote">A shopping day: brand outlets in the morning, then a big mall in Tianhe until the evening.</p>
+    <div class="freebox"><h3>Free time today</h3><ul><li><b>10am–3pm</b><span>Shop and eat at Wanguo Outlets</span></li><li><b>3:30–8pm</b><span>Shop and eat at Parc Central</span></li><li><b>From 8:30pm</b><span>Evening free</span></li></ul></div>
+    <ol class="tl"><li class="it t-opt"><div class="when"><span class="t">6:30am</span><span class="e">to 7:30am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Gym – Ros<span class="pill p-opt">Optional</span></p></div></li><li class="it t-plan"><div class="when"><span class="t">8:30am</span><span class="e">to 9:30am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Breakfast at the hotel</p></div></li><li class="it t-travel"><div class="when"><span class="t">~9:45am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">To Wanguo Outlets</p><p class="det">11 min</p></div></li><li class="it t-free"><div class="when"><span class="t">10am</span><span class="e">to 3pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><span class="kind">Free time</span><p class="ttl">Shop and eat at Wanguo Outlets</p><p class="det">Factory outlet mall with over 100 brand stores, including Nike, Adidas, Puma, FILA, Skechers, Columbia, The North Face, Tommy Hilfiger, Calvin Klein and Lacoste</p></div></li><li class="it t-travel"><div class="when"><span class="t">3pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">To Parc Central</p><p class="det">20 min</p></div></li><li class="it t-free"><div class="when"><span class="t">3:30pm</span><span class="e">to 8pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><span class="kind">Free time</span><p class="ttl">Shop and eat at Parc Central</p><p class="det">Also called Tianhuan Plaza 天环广场, a high-end mall in Tianhe. Easy for coffee, casual food, desserts and browsing.</p></div></li><li class="it t-travel"><div class="when"><span class="t">8pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Back to the hotel</p><p class="det">20 min</p></div></li><li class="it t-free"><div class="when"><span class="t">From 8:30pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><span class="kind">Free time</span><p class="ttl">Evening free</p></div></li></ol>
+  </div>
+</section>
+<section class="day" id="day5" data-date="2027-01-14">
+  <div class="wrap">
+    <div class="dayhead">
+      <div class="plaque"><span class="zh" lang="zh-Hans">第五天 · 1月14日 星期四</span><span class="pt">Day 5 · Thursday 14 January</span></div>
+      <span class="today" hidden>Today</span>
+    </div>
+    <h2>Yide Road and Beijing Road</h2>
+    <p class="daynote">Dried goods and Chinese New Year decorations in the morning, dim sum lunch, then Beijing Road until late.</p>
+    <div class="freebox"><h3>Free time today</h3><ul><li><b>~3:40–9:30pm</b><span>Shop and eat at Beijing Road Pedestrian Street</span></li><li><b>From 9:30pm</b><span>Evening free</span></li></ul></div>
+    <ol class="tl"><li class="it t-opt"><div class="when"><span class="t">6:15am</span><span class="e">to 7:30am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Gym – Ros<span class="pill p-opt">Optional</span></p></div></li><li class="it t-plan"><div class="when"><span class="t">7:30am</span><span class="e">to 8:15am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Breakfast at the hotel</p></div></li><li class="it t-travel"><div class="when"><span class="t">~8:15am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">To Yide Road 一德路</p><p class="det">10 min</p></div></li><li class="it t-plan"><div class="when"><span class="t">8:30am</span><span class="e">to 2pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Dried goods and CNY decorations on Yide Road</p><p class="det">Start at Haizhong Bao Haiwei Ganhuo Food Exchange Center. Known as the “Wall Street of dried seafood”: dried scallops, abalone and fish maw near wholesale prices, plus couplets, lanterns and festive snacks. Many shops close by 5pm.</p><p class="addr" lang="zh-Hans">海中宝海味干货食品交易中心</p></div></li><li class="it t-travel"><div class="when"><span class="t">2pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">To Dian Dou De</p><p class="det">12 min</p></div></li><li class="it t-plan"><div class="when"><span class="t">~2:15pm</span><span class="e">to ~3:30pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Lunch at Dian Dou De 点都德 (Ju Fu Lou)</p><p class="det">352 Beijing Rd, Yuexiu District</p></div></li><li class="it t-travel"><div class="when"><span class="t">~3:30pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Walk to Beijing Road Pedestrian Street</p><p class="det">10 min</p></div></li><li class="it t-free"><div class="when"><span class="t">~3:40pm</span><span class="e">to 9:30pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><span class="kind">Free time</span><p class="ttl">Shop and eat at Beijing Road Pedestrian Street</p></div></li><li class="it t-free"><div class="when"><span class="t">From 9:30pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><span class="kind">Free time</span><p class="ttl">Evening free</p><p class="det">The hotel is on Beijing Road</p></div></li></ol>
+  </div>
+</section>
+<section class="day" id="day6" data-date="2027-01-15">
+  <div class="wrap">
+    <div class="dayhead">
+      <div class="plaque"><span class="zh" lang="zh-Hans">第六天 · 1月15日 星期五</span><span class="pt">Day 6 · Friday 15 January</span></div>
+      <span class="today" hidden>Today</span>
+    </div>
+    <h2>Flying home</h2>
+    <p class="daynote">Breakfast, check out, and an afternoon flight back to Singapore.</p>
+    <div class="freebox"><h3>Free time today</h3><ul><li><b>~11:30am–1pm</b><span>Free time at the airport</span></li></ul></div>
+    <ol class="tl"><li class="it t-plan"><div class="when"><span class="t">8am</span><span class="e">to 9am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Breakfast at the hotel</p></div></li><li class="it t-travel"><div class="when"><span class="t">9am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Check out</p></div></li><li class="it t-travel"><div class="when"><span class="t">9:30am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Transfer to the airport</p><p class="det">About 45 min</p></div></li><li class="it t-travel"><div class="when"><span class="t">~10:30am</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Check in and clear immigration</p></div></li><li class="it t-free"><div class="when"><span class="t">~11:30am</span><span class="e">to ~1pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><span class="kind">Free time</span><p class="ttl">Free time at the airport</p><p class="det">Shop or eat before boarding</p></div></li><li class="it t-travel"><div class="when"><span class="t">~1pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Go to the gate and board</p></div></li><li class="it t-booked"><div class="when"><span class="t">1:30pm</span><span class="e">to 5:50pm</span></div><div class="dot" aria-hidden="true"></div><div class="what"><p class="ttl">Fly Guangzhou → Singapore<span class="pill p-booked">Flight</span></p><p class="det">SQ851, lands 5:50pm</p></div></li></ol>
+  </div>
+</section>
+
+<section id="details" class="day">
+  <div class="wrap">
+    <h2 class="sec-h">Flights, hotel and tours</h2>
+    <div class="rows">
+      <h3>Flights</h3>
+      <div class="row"><div class="dt">Sun 10 Jan<span>SQ850</span></div><div><p class="nm">Singapore 8:05am → Guangzhou 12:10pm</p></div></div>
+      <div class="row"><div class="dt">Fri 15 Jan<span>SQ851</span></div><div><p class="nm">Guangzhou 1:30pm → Singapore 5:50pm</p><p class="sub">Leave the hotel at 9:30am.</p></div></div>
+      <h3>Hotel</h3>
+      <div class="row"><div class="dt">Sun 10 – Fri 15 Jan<span>In 2:30pm · out 9am</span></div><div><p class="nm">Mercure Hotel Guangzhou Beijing Road Pedestrian Street</p><p class="sub">182 Beijing Rd, Yuexiu District, Guangzhou 510115. About 45 min from the airport.</p></div></div>
+      <h3>Tours</h3>
+      <div class="row"><div class="dt">Mon 11 Jan<span>9am–5pm</span></div><div><p class="nm">Full-day land tour</p><p class="sub"><a href="https://sg.trip.com/things-to-do/detail/105163697/" target="_blank" rel="noopener">Tour details on Trip.com ↗</a></p></div></div>
+      <div class="row"><div class="dt">Mon 11 Jan<span>7pm–9:15pm</span></div><div><p class="nm">Guangzhou Banquet dinner show</p><p class="sub"><a href="https://sg.trip.com/things-to-do/detail/110035659?language=EN&amp;locale=en_sg" target="_blank" rel="noopener">Show details on Trip.com ↗</a></p></div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<script>
+(function () {
+  try {
+    var now = new Date(Date.now() + 8 * 3600e3); // Guangzhou time (UTC+8)
+    var today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()),
+        start = Date.UTC(2027, 0, 10), end = Date.UTC(2027, 0, 15);
+    var diff = Math.round((start - today) / 864e5);
+    var el = document.getElementById("countdown");
+    if (diff > 1) el.textContent = diff + " days to go";
+    else if (diff === 1) el.textContent = "We fly tomorrow";
+    else if (today <= end) {
+      var n = Math.round((today - start) / 864e5) + 1;
+      el.textContent = "Today is day " + n + " of 6";
+      var sec = document.getElementById("day" + n);
+      if (sec) {
+        var b = sec.querySelector(".today"); if (b) b.hidden = false;
+        var chip = document.querySelector('.daynav a[data-day="day' + n + '"]');
+        if (chip) { chip.classList.add("is-today"); chip.setAttribute("aria-current", "date"); }
+      }
+    }
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
